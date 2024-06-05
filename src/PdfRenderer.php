@@ -5,6 +5,7 @@ namespace PdfEmbed;
 use Omeka\Api\Representation\MediaRepresentation;
 use Omeka\Media\FileRenderer\RendererInterface;
 use Laminas\View\Renderer\PhpRenderer;
+use Omeka\Media\FileRenderer\ThumbnailRenderer;
 
 class PdfRenderer implements RendererInterface
 {
@@ -19,22 +20,10 @@ class PdfRenderer implements RendererInterface
                 $view->escapeHtml($media->originalUrl())
             );
         } else {
-            $thumbnailType = $options['thumbnailType'] ?? 'large';
-            $link = array_key_exists('link', $options) ? $options['link'] : 'original';
-            $attribs = $options['thumbnailAttribs'] ?? [];
-            $img = $view->thumbnail($media, $thumbnailType, $attribs);
-            if (!$link) {
-                return $img;
-            }
+            $thumb = new ThumbnailRenderer;
+            return $thumb->render($view, $media);
 
-            $url = $this->getLinkUrl($media, $link);
-            if (!$url) {
-                return $img;
-            }
 
-            $title = $media->displayTitle();
-
-            return sprintf('<a href="%s" title="%s">%s</a>', $view->escapeHtml($url), $view->escapeHtml($title), $img);
         }
     }
 

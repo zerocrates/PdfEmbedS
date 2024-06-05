@@ -25,19 +25,4 @@ class PdfRenderer implements RendererInterface
             );
         }
     }
-
-    protected function getLinkUrl(MediaRepresentation $media, $linkType)
-    {
-        switch ($linkType) {
-            case 'original':
-                return $media->originalUrl();
-            case 'item':
-                return $media->item()->url();
-            case 'media':
-                return $media->url();
-            default:
-                throw new \InvalidArgumentException(sprintf('Invalid link type "%s"', $linkType));
-        }
-    }
-
 }

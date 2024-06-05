@@ -30,13 +30,13 @@ class Module extends AbstractModule
 
         $form->add([
             'type' => 'checkbox',
-            'name' => 'embed_pdf',
+            'name' => 'disable_embed_pdf',
             'options' => [
                 'element_group' => 'pdfembed',
-                'label' => 'Embed Pdfs in pages', // @translate
+                'label' => 'Disable PDF Embed in pages', // @translate
             ],
             'attributes' => [
-                'value' => $siteSettings->get('embed_pdf'),
+                'value' => $siteSettings->get('disable_embed_pdf'),
             ],
         ]);
 

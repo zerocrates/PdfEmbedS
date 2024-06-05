@@ -13,17 +13,16 @@ class PdfRenderer implements RendererInterface
     {
         $siteSettings = $media->getServiceLocator()->get('Omeka\Settings\Site');
 
-        if ($siteSettings->get('embed_pdf')) {
+        if ($siteSettings->get('disable_embed_pdf')) {
+            $thumb = new ThumbnailRenderer;
+            return $thumb->render($view, $media);
+
+        } else {
 
             return sprintf(
                 '<iframe src="%s" style="width: 100%%; height: 600px;" allowfullscreen></iframe>',
                 $view->escapeHtml($media->originalUrl())
             );
-        } else {
-            $thumb = new ThumbnailRenderer;
-            return $thumb->render($view, $media);
-
-
         }
     }
 

@@ -7,7 +7,6 @@ use Omeka\Module\AbstractModule;
 
 class Module extends AbstractModule
 {
-
     public function getServiceLocator()
     {
         return $this->serviceLocator;
@@ -15,7 +14,7 @@ class Module extends AbstractModule
 
     public function getConfig()
     {
-            return include __DIR__ . '/config/module.config.php';
+        return include __DIR__ . '/config/module.config.php';
     }
 
     public function addSiteSettings(Event $event)
@@ -33,7 +32,7 @@ class Module extends AbstractModule
             'name' => 'disable_embed_pdf',
             'options' => [
                 'element_group' => 'pdfembed',
-                'label' => 'Disable PDF Embed in pages', // @translate
+                'label' => 'Disable PDF Embed in this site', // @translate
             ],
             'attributes' => [
                 'value' => $siteSettings->get('disable_embed_pdf'),
@@ -51,5 +50,4 @@ class Module extends AbstractModule
         );
 
     }
-
 }

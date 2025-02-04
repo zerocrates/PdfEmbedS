@@ -16,8 +16,9 @@ class PdfRenderer implements RendererInterface
             $thumb = new ThumbnailRenderer;
             return $thumb->render($view, $media);
         } else {
+            $view->headScript()->appendFile($view->assetUrl('js/pdf-embed.js', 'PdfEmbed'));
             return sprintf(
-                '<iframe src="%s" style="width: 100%%; height: 600px;" allowfullscreen></iframe>',
+                '<iframe src="%s" style="width: 100%%; height: 600px;" class="pdf-embed" allowfullscreen></iframe>',
                 $view->escapeHtml($media->originalUrl())
             );
         }
